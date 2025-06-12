@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin (origins = "http://localhost:5173/")
+@CrossOrigin (origins = "http://localhost:5175/")
 public class ProductController {
 
     private final ProductService productService;
@@ -18,10 +18,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        System.out.println(">>> /api/products called");
-        return productService.getAllProducts();
-
+    public List<Product> getAllProducts(@RequestParam(required = false) String search) {
+        return productService.searchProducts(search);
     }
 
     @GetMapping("/category/{categoryId}")
@@ -29,5 +27,4 @@ public class ProductController {
         return productService.getAllProductsByCategory(categoryId);
     }
 }
-
 
